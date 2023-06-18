@@ -2,6 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const multer = require('multer');
 const cors = require('cors');
+const fs = require('fs');
 require('dotenv').config();
 
 const {
@@ -22,6 +23,9 @@ mongoose
 
 const storage = multer.diskStorage({
   destination: (_, __, cb) => {
+    if (!fs.existsSync('uploads')) {
+      fs.mkdir('uploads');
+    }
     cb(null, 'uploads');
   },
   filename: (_, file, cb) => {
