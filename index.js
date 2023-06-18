@@ -2,6 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const multer = require('multer');
 const cors = require('cors');
+require('dotenv').config();
 
 const {
   registerValidation,
@@ -15,9 +16,7 @@ const PostController = require('./controllers/PostController');
 const app = express();
 
 mongoose
-  .connect(
-    'mongodb+srv://ashotmartirosyan637:admin123@cluster0.bxv62xs.mongodb.net/blog?retryWrites=true&w=majority',
-  )
+  .connect(process.env.MONGODB_URL)
   .then(() => console.log('DB OK'))
   .catch((err) => console.log(('DB error', err)));
 
